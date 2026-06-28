@@ -31,7 +31,7 @@ export function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[100svh] items-end overflow-hidden lg:items-center"
+      className="relative isolate flex min-h-[100svh] items-end overflow-hidden lg:max-h-200 lg:min-h-200 lg:items-center"
     >
       {/* Background photo as its own layer. Pilar stays uncovered. */}
       <div aria-hidden className="absolute inset-0 -z-10">
@@ -54,9 +54,11 @@ export function Hero() {
 
         {/* Gold light rays sweeping in from the top-right ("the other side"),
             crossing toward the copy. Sits over the photo, under the content.
-            Dimmed on mobile (the portrait crop is narrow, so the rays would
-            otherwise dominate) and full strength from lg up. */}
-        <div className="absolute inset-0 z-1 opacity-40 lg:opacity-100">
+            On mobile the canvas is confined to the upper area (top ~45%) so the
+            rays stay near Pilar's head and don't run down to the text; on lg+
+            they fill the whole hero. The canvas itself is masked to fade at its
+            lower edge so the cropped bottom isn't a hard line. */}
+        <div className="absolute inset-x-0 top-0 z-1 h-[45%] mask-[linear-gradient(to_bottom,black_70%,transparent)] lg:bottom-0 lg:h-auto lg:mask-none">
           <SideRays
             origin="top-right"
             rayColor1="#c8a45a"

@@ -21,7 +21,7 @@ export function Pilar() {
     <section
       id="pilar"
       aria-labelledby="pilar-title"
-      className="relative isolate flex min-h-[100svh] items-end overflow-hidden lg:items-center"
+      className="relative isolate flex min-h-[100svh] items-end overflow-hidden lg:min-h-[750px] lg:items-center"
     >
       {/* Banner as its own layer. Pilar stays uncovered on the right. */}
       <div aria-hidden className="absolute inset-0 -z-10">

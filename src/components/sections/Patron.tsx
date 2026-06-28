@@ -85,11 +85,11 @@ export function Patron() {
             <motion.li
               key={text}
               variants={card}
-              className="group relative flex flex-col gap-5 rounded-2xl border border-earth-gold/20 bg-white/50 p-7 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),inset_0_0_24px_0_rgba(122,100,66,0.07)] transition-colors duration-500 hover:border-earth-gold/45"
+              className="group relative flex items-start gap-4 rounded-2xl border border-earth-gold/20 bg-white/50 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),inset_0_0_24px_0_rgba(122,100,66,0.07)] transition-colors duration-500 hover:border-earth-gold/45"
             >
-              {/* Icon medallion — carved seal on the light face. */}
-              <span className="flex size-12 items-center justify-center rounded-full border border-earth-gold/30 bg-cream text-earth-gold shadow-[inset_0_0_12px_0_rgba(122,100,66,0.12)]">
-                <Icon size={22} strokeWidth={1.5} />
+              {/* Icon medallion beside the text — carved seal on the light face. */}
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-earth-gold/30 bg-cream text-earth-gold shadow-[inset_0_0_12px_0_rgba(122,100,66,0.12)]">
+                <Icon size={20} strokeWidth={1.5} />
               </span>
               <p className="text-base leading-relaxed text-forest-900/85">
                 {text}
