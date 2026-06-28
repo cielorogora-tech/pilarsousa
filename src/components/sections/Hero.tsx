@@ -53,9 +53,10 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_55%,transparent)_30%,transparent_65%)] lg:bg-[linear-gradient(to_right,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_50%,transparent)_28%,transparent_55%)]" />
 
         {/* Gold light rays sweeping in from the top-right ("the other side"),
-            crossing toward the copy. Sits over the photo, under the content
-            (the Container below is z-0 in normal flow, above this -z-10 layer). */}
-        <div className="absolute inset-0 z-1">
+            crossing toward the copy. Sits over the photo, under the content.
+            Dimmed on mobile (the portrait crop is narrow, so the rays would
+            otherwise dominate) and full strength from lg up. */}
+        <div className="absolute inset-0 z-1 opacity-40 lg:opacity-100">
           <SideRays
             origin="top-right"
             rayColor1="#c8a45a"
@@ -71,8 +72,9 @@ export function Hero() {
       </div>
 
       {/* Mobile pushes content down ~200px so Pilar's photo breathes at the
-          top; desktop uses the normal vertical rhythm. */}
-      <Container className="pb-16 pt-[200px] lg:py-section">
+          top; desktop uses a fluid vertical padding that stays compact on
+          short laptops (e.g. 1366×768) and only grows on tall screens. */}
+      <Container className="pb-16 pt-[200px] lg:py-[clamp(2.5rem,1rem+5vh,7rem)]">
         <div className="max-w-2xl">
           {/* Program logotype. */}
           <Reveal>
@@ -90,9 +92,9 @@ export function Hero() {
           <Reveal delay={0.1}>
             <h1
               id="hero-title"
-              className="text-3xl leading-[1.2] text-foreground sm:text-4xl lg:text-5xl"
+              className="text-foreground text-[clamp(1.6rem,1rem+2.2vw,2.75rem)] leading-[1.15]"
             >
-              <span className="font-sans font-regular text-foreground">
+              <span className="font-sans font-normal text-foreground">
                 Sabes lo que quieres y tienes el potencial.
               </span>{" "}
               <GoldText className="font-display font-semibold">
@@ -101,9 +103,9 @@ export function Hero() {
             </h1>
           </Reveal>
 
-          {/* Description — larger body copy (~18px), brighter. */}
+          {/* Description — fluid 16→18px, brighter. */}
           <Reveal delay={0.2}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/95">
+            <p className="mt-5 max-w-xl leading-relaxed text-foreground/95 text-[clamp(1rem,0.95rem+0.3vw,1.125rem)]">
               Un entrenamiento práctico de tres días para ir al origen de la
               identidad que está creando tu realidad actual, eliminar el bloqueo
               invisible que te mantiene estancada y salir con un plan de acción

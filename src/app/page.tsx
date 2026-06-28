@@ -4,16 +4,20 @@ import { Patron } from "@/components/sections/Patron";
 import { Experiencia } from "@/components/sections/Experiencia";
 import { Pilar } from "@/components/sections/Pilar";
 import { Cierre } from "@/components/sections/Cierre";
+import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <Manifiesto />
-      <Patron />
-      <Experiencia />
-      <Pilar />
-      <Cierre />
-    </main>
+    <>
+      <main>
+        <Hero />
+        <Manifiesto />
+        <Patron />
+        <Experiencia />
+        <Pilar />
+        <Cierre />
+      </main>
+      <Footer />
+    </>
   );
 }

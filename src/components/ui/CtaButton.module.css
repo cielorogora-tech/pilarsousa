@@ -17,18 +17,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 3rem;
+  text-align: center;
+  /* Fluid horizontal padding: tight on small phones, roomy on desktop. */
+  padding: 1rem clamp(1.5rem, 0.5rem + 6vw, 3rem);
+  max-width: 100%; /* never exceed the viewport */
   border: 0;
   border-radius: 9999px;
   cursor: pointer;
-  white-space: nowrap;
   overflow: hidden;
   isolation: isolate;
 
   font-family: var(--font-display), serif;
   font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.25em;
+  /* Fluid tracking: less on narrow screens so the label fits. */
+  letter-spacing: clamp(0.12em, 0.05em + 0.4vw, 0.25em);
   text-transform: uppercase;
   color: hsl(30 30% calc(12% - (var(--active) * 4%))); /* dark ink label */
 

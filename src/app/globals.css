@@ -36,6 +36,7 @@
   /* ---- Typography ---- */
   --font-display: var(--font-cinzel); /* titles — ritual, ancient, authority */
   --font-sans: var(--font-manrope); /* body — modern, refined, readable */
+  --font-accent: var(--font-cormorant); /* editorial italic — short emphasis */
 
   /* ---- Layout rhythm ---- */
   --spacing-section: 7rem; /* vertical breathing room between sections */

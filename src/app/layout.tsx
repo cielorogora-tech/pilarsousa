@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Manrope } from "next/font/google";
+import { Cinzel, Manrope, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 // Display font for titles — ritual, ancient, authoritative.
@@ -15,6 +15,16 @@ const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Editorial accent — used italic to highlight key words with real cursive
+// (Cinzel has no true italic). Reserved for short emphasis, never body blocks.
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -39,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cinzel.variable} ${manrope.variable} h-full antialiased`}
+      className={`${cinzel.variable} ${manrope.variable} ${cormorant.variable} h-full antialiased`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject
           attributes like cz-shortcut-listen on <body> before React hydrates,
