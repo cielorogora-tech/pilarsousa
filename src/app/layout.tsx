@@ -41,7 +41,15 @@ export default function RootLayout({
       lang="es"
       className={`${cinzel.variable} ${manrope.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">{children}</body>
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject
+          attributes like cz-shortcut-listen on <body> before React hydrates,
+          causing a harmless mismatch. This scopes the suppression to body only. */}
+      <body
+        suppressHydrationWarning
+        className="min-h-full bg-background text-foreground"
+      >
+        {children}
+      </body>
     </html>
   );
 }

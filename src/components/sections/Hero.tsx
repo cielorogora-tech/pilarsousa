@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { FactBadge } from "@/components/ui/FactBadge";
 import { GoldText } from "@/components/ui/GoldText";
+import { SideRays } from "@/components/ui/SideRays";
 import bgDesktop from "@/../public/bg-pilarsousa.jpg";
 import bgMobile from "@/../public/bg-pilarsousa-mobile.jpg";
 import logo from "@/../public/LOGO.png";
@@ -50,12 +51,29 @@ export function Hero() {
         {/* Readability gradient — eases fully to transparent (no visible
             mid-point cut). Bottom variant on mobile, left on desktop. */}
         <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_55%,transparent)_30%,transparent_65%)] lg:bg-[linear-gradient(to_right,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_50%,transparent)_28%,transparent_55%)]" />
+
+        {/* Gold light rays sweeping in from the top-right ("the other side"),
+            crossing toward the copy. Sits over the photo, under the content
+            (the Container below is z-0 in normal flow, above this -z-10 layer). */}
+        <div className="absolute inset-0 z-1">
+          <SideRays
+            origin="top-right"
+            rayColor1="#c8a45a"
+            rayColor2="#f3e2b0"
+            intensity={1.6}
+            spread={2}
+            speed={2.2}
+            blend={0.4}
+            saturation={1.2}
+            opacity={0.85}
+          />
+        </div>
       </div>
 
       {/* Mobile pushes content down ~200px so Pilar's photo breathes at the
           top; desktop uses the normal vertical rhythm. */}
       <Container className="pb-16 pt-[200px] lg:py-section">
-        <div className="max-w-2xl [text-shadow:0_2px_18px_rgba(8,8,8,0.5)]">
+        <div className="max-w-2xl">
           {/* Program logotype. */}
           <Reveal>
             <Image
@@ -72,9 +90,9 @@ export function Hero() {
           <Reveal delay={0.1}>
             <h1
               id="hero-title"
-              className="mt-5 text-3xl leading-[1.2] text-foreground sm:text-4xl lg:text-5xl"
+              className="text-3xl leading-[1.2] text-foreground sm:text-4xl lg:text-5xl"
             >
-              <span className="font-sans font-light text-foreground">
+              <span className="font-sans font-regular text-foreground">
                 Sabes lo que quieres y tienes el potencial.
               </span>{" "}
               <GoldText className="font-display font-semibold">

@@ -1,0 +1,133 @@
+/*
+  Reactive gold CTA.
+
+  Adapted from a "galaxy button": we keep ONLY its soul — a single --active
+  custom property (0 → 1 on hover/focus) that drives a warm glow radiating
+  from the corner, a faint scale-up, and inner-edge highlights. Everything
+  else (stars, shooting stars, spinning galaxy, violet) is dropped to stay
+  sober and on-brand. Pure CSS, no styled-components.
+*/
+
+.button {
+  --active: 0;
+  --gold: 38 52% 57%; /* #c8a45a — primary gold */
+  --gold-bright: 44 73% 76%; /* #f3e2b0 — lighter gold for the glow core */
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  border: 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+
+  font-family: var(--font-display), serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: hsl(30 30% calc(12% - (var(--active) * 4%))); /* dark ink label */
+
+  /* Layered background: a warm radial glow that grows with --active, over a
+     solid gold base. The glow origin sits in the bottom-right corner. */
+  background:
+    radial-gradient(
+        120% 120% at 115% 115%,
+        hsl(var(--gold-bright) / var(--active)) 0%,
+        transparent 55%
+      )
+      no-repeat,
+    linear-gradient(110deg, #c8a45a 0%, #f3e2b0 45%, #e2c27a 55%, #c8a45a 100%);
+
+  /* Glow halo + inner edge highlights, all scaled by --active. */
+  box-shadow:
+    0 0 calc(var(--active) * 4em) calc(var(--active) * 1.2em)
+      hsl(var(--gold) / 0.45),
+    0 0.05em 0 0 hsl(var(--gold-bright) / calc(var(--active) * 0.9)) inset,
+    0 -0.05em 0 0 hsl(30 40% 20% / calc(var(--active) * 0.5)) inset,
+    0 10px 30px -10px hsl(var(--gold) / 0.6);
+
+  scale: calc(1 + (var(--active) * 0.04));
+
+  transition:
+    background 0.35s ease-out,
+    box-shadow 0.35s ease-out,
+    scale 0.25s ease-out,
+    color 0.35s ease-out;
+}
+
+/* Continuous sheen — a soft light reflection that sweeps across the button
+   on a loop, like light catching polished metal. Diagonal, sober, gold-white. */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    hsl(44 80% 92% / 0.55) 48%,
+    hsl(44 80% 95% / 0.7) 50%,
+    hsl(44 80% 92% / 0.55) 52%,
+    transparent 75%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  background-position: 150% center;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+  animation: sheen-sweep 4.5s ease-in-out infinite;
+}
+
+/* Keep the label above the sheen. */
+.button > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes sheen-sweep {
+  0% {
+    background-position: 150% center;
+  }
+  /* sweep happens in the first ~35%, then a long pause before repeating */
+  35%,
+  100% {
+    background-position: -50% center;
+  }
+}
+
+.button:hover,
+.button:focus-visible {
+  --active: 1;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.button:active {
+  scale: 1;
+}
+
+.button.block {
+  display: flex;
+  width: 100%;
+}
+
+/* Honor reduced-motion: keep the glow, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: background 0.35s ease-out, box-shadow 0.35s ease-out;
+    scale: 1 !important;
+  }
+  .button::before {
+    animation: none;
+    opacity: 0;
+  }
+}
