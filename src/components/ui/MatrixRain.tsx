@@ -10,7 +10,18 @@ import { useEffect, useRef } from "react";
  *  - low frame rate + low opacity so it stays a texture, not a distraction.
  * Fills its positioned parent; parent should clip overflow.
  */
-export function MatrixRain() {
+type MatrixRainProps = {
+  /**
+   * Opacity of the per-frame ink veil that creates the fading trail. On solid
+   * dark backgrounds (cards) keep the default; over a photo use a low value
+   * (e.g. 0.04) so glyphs leave a short trail without darkening the image.
+   */
+  fade?: number;
+  /** Overall canvas opacity (Tailwind-independent, applied inline). */
+  opacity?: number;
+};
+
+export function MatrixRain({ fade = 0.08, opacity = 0.25 }: MatrixRainProps = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -54,8 +65,19 @@ export function MatrixRain() {
       if (t - last < 50) return;
       last = t;
 
-      ctx.fillStyle = "rgba(10, 9, 8, 0.08)"; // fade trail toward ink
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      if (fade > 0) {
+        // Solid-dark mode: an ink veil builds the fading trail.
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = `rgba(10, 9, 8, ${fade})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else {
+        // Over-photo mode: fade old glyphs toward transparent (not toward ink)
+        // so the trail still forms but the artwork behind stays fully visible.
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.12)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = "#41a75c"; // brighter, more vivid green glyphs
       ctx.font = `${fontSize}px monospace`;
 
@@ -93,13 +115,14 @@ export function MatrixRain() {
       io.disconnect();
       ro.disconnect();
     };
-  }, []);
+  }, [fade]);
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="absolute inset-0 size-full opacity-25"
+      style={{ opacity }}
+      className="absolute inset-0 size-full"
     />
   );
 }

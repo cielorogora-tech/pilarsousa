@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { GoldText } from "@/components/ui/GoldText";
-import { WHATSAPP_GROUP_URL } from "@/lib/links";
+import { WHATSAPP_GROUP_URL, WHATSAPP_SUPPORT_URL } from "@/lib/links";
 import bgDesktop from "@/../public/bg-pilarsousa.jpg";
 import bgMobile from "@/../public/bg-pilarsousa-mobile.jpg";
 import logo from "@/../public/LOGO.png";
@@ -97,6 +97,28 @@ export default function GraciasPage() {
             >
               <WhatsAppIcon className="size-5 transition-transform duration-300 group-hover:scale-110" />
               Unirme al grupo privado
+            </a>
+          </Reveal>
+
+          {/* Support — clearly secondary. A thin divider with a label sets it
+              apart from the primary group CTA above; outline style, not filled. */}
+          <Reveal delay={0.42}>
+            <div className="mx-auto mt-12 flex max-w-xs items-center gap-4">
+              <span className="h-px flex-1 bg-foreground/25" />
+              <span className="font-display text-sm uppercase tracking-[0.3em] text-foreground">
+                ¿Necesitas ayuda?
+              </span>
+              <span className="h-px flex-1 bg-foreground/25" />
+            </div>
+
+            <a
+              href={WHATSAPP_SUPPORT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center justify-center gap-2.5 rounded-full border border-[#25D366]/60 px-8 py-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-[#25D366] transition-all duration-300 hover:border-[#25D366] hover:bg-[#25D366]/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366]"
+            >
+              <WhatsAppIcon className="size-4 transition-transform duration-300 group-hover:scale-110" />
+              Hablar con soporte
             </a>
           </Reveal>
         </Container>

@@ -1,146 +1,89 @@
 "use client";
 
-import Image, { type StaticImageData } from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Gift } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { MatrixRain } from "@/components/ui/MatrixRain";
-import sistema from "@/../public/sistema.png";
-import roadmap from "@/../public/roadmap.png";
-import planEjecucion from "@/../public/plan de ejecucion.png";
+import banner from "@/../public/banner-web-bonos.jpg";
+import bannerMobile from "@/../public/banner-web-bonos-mobile.jpg";
 
-// Bonus ebooks — the 3D mockups carry the branding. Each card shows the ebook
-// over a subtle matrix backdrop. Day 3 copy is written to match the other two.
-const BONUSES: Array<{ tag: string; title: string; text: string; image: StaticImageData }> = [
-  {
-    tag: "Bono 01",
-    title: "Sistema",
-    text: "El método paso a paso para reprogramar tu identidad y bajar la espiritualidad a lo práctico.",
-    image: sistema,
-  },
-  {
-    tag: "Bono 02",
-    title: "Roadmap",
-    text: "Un mapa claro de decisiones estratégicas para sostener tu nueva identidad después del bootcamp.",
-    image: roadmap,
-  },
-  {
-    tag: "Bono 03",
-    title: "Plan de ejecución",
-    text: "Un plan concreto para pasar a la acción y manifestar resultados tangibles en tu vida real.",
-    image: planEjecucion,
-  },
-];
-
-const grid: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.14 } },
-};
-
-const card: Variants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+// The three bonuses, named as a compact list below the artwork.
+const BONUSES = ["Sistema", "Roadmap", "Plan de ejecución"];
 
 /**
- * Bonus section — framed as a gift. After the three days, Pilar adds three
- * practical ebooks (Sistema, Roadmap, Plan de ejecución). Each card features
- * the 3D ebook mockup over a subtle matrix-green backdrop, sealed-present feel.
+ * Section 5 — Bonuses, reframed as a compact banner (not a full section).
+ *
+ * Per client direction: a single ~1140×500 banner with a background image of
+ * the three packaged bonuses (centered, reading toward the top). Copy sits in a
+ * gradient strip along the bottom so it stays legible over any artwork. Kept
+ * small on purpose so it doesn't outweigh the primary CTA above.
  */
 export function Bonos() {
   return (
-    <section id="bonos" className="bg-background py-[clamp(4rem,2rem+8vh,7rem)]">
+    <section
+      id="bonos"
+      className="bg-background pt-2 pb-[clamp(4rem,2rem+8vh,7rem)]"
+    >
       <Container>
-        {/* Gift label above the title. */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.5, ease: "backOut" }}
-          className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-surface/40 px-4 py-2 text-sm text-accent"
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto h-115 max-w-285 overflow-hidden rounded-3xl border border-accent/20 bg-surface/30 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(243,226,176,0.08)] sm:h-100"
         >
-          <Gift size={16} />
-          <span className="font-display uppercase tracking-[0.2em]">
-            Regalos para ti
-          </span>
+          {/* Background artwork — responsive: a vertical crop on mobile, the
+              wide web banner on sm+. Each layer shows only at its breakpoint. */}
+          <div
+            aria-hidden
+            style={{ backgroundImage: `url(${bannerMobile.src})` }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat sm:hidden"
+          />
+          <div
+            aria-hidden
+            style={{ backgroundImage: `url(${banner.src})` }}
+            className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat sm:block"
+          />
+
+          {/* Bottom gradient strip — guarantees the copy reads over any image. */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(to_top,var(--color-ink)_10%,color-mix(in_oklab,var(--color-ink)_70%,transparent)_45%,transparent)]"
+          />
+
+          {/* Copy, seated in the bottom strip. */}
+          <div className="absolute inset-x-0 bottom-0 p-8 text-center sm:p-10">
+            {/* Gift label — frosted glass over the artwork, white text+icon. */}
+            <span className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs text-white backdrop-blur-md">
+              <Gift size={14} />
+              <span className="font-display font-semibold uppercase tracking-[0.2em]">
+                Regalos para ti
+              </span>
+            </span>
+
+            <h2 className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
+              Diseñado para generar{" "}
+              <em className="font-accent font-medium italic text-accent-soft">
+                resultados tangibles
+              </em>
+            </h2>
+
+            {/* The three bonuses as a single row of gold-separated labels. */}
+            <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              {BONUSES.map((name, i) => (
+                <li key={name} className="flex items-center gap-4">
+                  <span className="font-accent text-lg italic text-foreground sm:text-xl">
+                    {name}
+                  </span>
+                  {i < BONUSES.length - 1 && (
+                    <span aria-hidden className="text-accent/50">
+                      ✶
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
-
-        <SectionTitle tone="dark">
-          Diseñado para generar{" "}
-          <em className="font-accent font-medium italic text-accent-soft">
-            resultados tangibles
-          </em>
-        </SectionTitle>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-foreground/60"
-        >
-          Este bootcamp es práctico, pensado para generar resultados tangibles
-          en las áreas más importantes de tu vida. Para que salgas con claridad,
-          visión y un mapa de decisiones estratégicas que sostengan tu nueva
-          identidad, decidí regalarte estos bonos.
-        </motion.p>
-
-        <motion.ul
-          variants={grid}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid gap-6 md:grid-cols-3"
-        >
-          {BONUSES.map(({ tag, title, text, image }) => (
-            <motion.li
-              key={tag}
-              variants={card}
-              onMouseMove={(e) => {
-                // Track the cursor as CSS vars for the spotlight glow.
-                const r = e.currentTarget.getBoundingClientRect();
-                e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-                e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
-              }}
-              className="group relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl border border-accent/15 bg-surface/30 p-8 text-center shadow-[inset_0_1px_0_0_rgba(243,226,176,0.06),inset_0_0_40px_0_rgba(0,0,0,0.5)] transition-colors duration-500 hover:border-accent/40"
-            >
-              {/* Matrix backdrop — subtle, behind everything. */}
-              <MatrixRain />
-
-              {/* Spotlight glow that follows the cursor (fades in on hover). */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(220px_circle_at_var(--mx,50%)_var(--my,50%),rgba(126,157,99,0.22),transparent_70%)]"
-              />
-
-              {/* Ebook mockup — the protagonist. */}
-              <div className="relative">
-                <Image
-                  src={image}
-                  alt={`Ebook ${title}`}
-                  sizes="(min-width: 768px) 280px, 60vw"
-                  className="h-auto w-44 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:-translate-y-1"
-                  placeholder="blur"
-                />
-              </div>
-
-              <p className="relative font-display text-sm uppercase tracking-[0.2em] text-accent">
-                {tag}
-              </p>
-              <p className="relative font-accent text-2xl italic text-foreground">
-                {title}
-              </p>
-              <p className="relative text-base leading-relaxed text-foreground/70">
-                {text}
-              </p>
-            </motion.li>
-          ))}
-        </motion.ul>
       </Container>
     </section>
   );

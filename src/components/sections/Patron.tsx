@@ -2,26 +2,27 @@
 
 import { motion, type Variants } from "framer-motion";
 import {
-  EyeOff,
-  HandHeart,
-  Users,
-  Shield,
-  ScrollText,
+  BookOpen,
+  Flame,
+  Compass,
+  Lightbulb,
+  RotateCcw,
   Lock,
   type LucideIcon,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
-// The six unconscious patterns — copy verbatim from the client. Icons are
-// abstract (never literal): each suggests the wound without illustrating it.
+// The six recognizable symptoms of the invisible block — written for
+// identification ("this happens to you"), not deep diagnosis. Icons are
+// abstract: each suggests the symptom without illustrating it literally.
 const PATTERNS: Array<{ icon: LucideIcon; text: string }> = [
-  { icon: EyeOff, text: "Cree que ser vista no es seguro." },
-  { icon: HandHeart, text: "Asocia el amor con el sacrificio." },
-  { icon: Users, text: "Necesita la aprobación de los demás." },
-  { icon: Shield, text: "Encuentra protección en seguir siendo víctima." },
-  { icon: ScrollText, text: "Utiliza su historia para justificar por qué todavía no puede." },
-  { icon: Lock, text: "Prefiere el dolor conocido antes que la incertidumbre de cambiar." },
+  { icon: BookOpen, text: "Consumes mucha información, pero no ves resultados." },
+  { icon: Flame, text: "Tienes motivación un día, pero no logras sostenerla." },
+  { icon: Compass, text: "Te falta claridad sobre cómo dar los siguientes pasos." },
+  { icon: Lightbulb, text: "Sabes mucho, pero te cuesta aplicarlo en el día a día." },
+  { icon: RotateCcw, text: "Empiezas con todo, pero a las semanas vuelves a lo de siempre." },
+  { icon: Lock, text: "Sientes que algo invisible te frena, aunque no sabes qué es." },
 ];
 
 const container: Variants = {
@@ -53,37 +54,40 @@ export function Patron() {
       className="bg-cream text-forest-900 py-[clamp(4rem,2rem+8vh,7rem)]"
     >
       <Container>
-        {/* Reframing headline — shared title pattern, light tone. Emphasis via
-            Cormorant italic, never Cinzel caps. */}
+        {/* Reframing headline — now leads with the conscious/unconscious split
+            (client direction). Emphasis via Cormorant italic, never Cinzel caps. */}
         <SectionTitle tone="light">
-          Quieres una nueva realidad, pero{" "}
-          <em className="font-accent font-medium italic text-earth-gold">una parte de ti</em>{" "}
-          todavía protege la identidad que sostiene tu vieja realidad.
+          Conscientemente quieres cambiar, pero{" "}
+          <em className="font-accent font-medium italic text-earth-gold">
+            inconscientemente
+          </em>{" "}
+          no.
         </SectionTitle>
-
-        {/* Lead-in to the list. */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-forest-900/70"
-        >
-          Conscientemente quieres cambiar. Pero inconscientemente no.
-        </motion.p>
 
         {/* Highlighted truth — the invisible block. */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="mx-auto mt-6 max-w-2xl text-center font-accent text-2xl italic text-earth-gold sm:text-3xl"
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="mx-auto mt-8 max-w-2xl text-center font-accent text-2xl italic text-earth-gold sm:text-3xl"
         >
           Se crea, en el plano espiritual, un bloqueo invisible.
         </motion.p>
 
-        {/* Re-introduces the list after the highlighted block line. */}
+        {/* The old headline, now demoted to a body line after the block. */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-forest-900/70"
+        >
+          Quieres una nueva realidad, pero una parte de ti todavía protege la
+          identidad que sostiene tu vieja realidad.
+        </motion.p>
+
+        {/* Re-introduces the list. */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -120,23 +124,6 @@ export function Patron() {
           ))}
         </motion.ul>
 
-        {/* Closing truth — plain readable body type, emphasis via italic only. */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-10 max-w-2xl text-center"
-        >
-          <p className="text-lg leading-relaxed text-forest-900">
-            Mientras no elimines ese{" "}
-            <em className="font-accent text-2xl italic text-earth-gold sm:text-3xl">
-              bloqueo invisible
-            </em>{" "}
-            que limita tu nueva identidad, vas a continuar reproduciendo la
-            anterior.
-          </p>
-        </motion.div>
       </Container>
     </section>
   );

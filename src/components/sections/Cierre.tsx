@@ -5,17 +5,16 @@ import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { GoldText } from "@/components/ui/GoldText";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
-import { cn } from "@/lib/cn";
-import styles from "./Cierre.module.css";
+import { TrustScoreCard } from "@/components/ui/TrustScoreCard";
 // New testimonials — IMG_5250 leads, then the rest, ahead of the originals.
-import img5250 from "@/../public/Testimonios/IMG_5250.PNG";
-import img5243 from "@/../public/Testimonios/IMG_5243.PNG";
-import img5244 from "@/../public/Testimonios/IMG_5244.PNG";
-import img5245 from "@/../public/Testimonios/IMG_5245.PNG";
-import img5246 from "@/../public/Testimonios/IMG_5246.PNG";
-import img5247 from "@/../public/Testimonios/IMG_5247.PNG";
-import img5248 from "@/../public/Testimonios/IMG_5248.PNG";
-import img5249 from "@/../public/Testimonios/IMG_5249.PNG";
+import img5250 from "@/../public/Testimonios/IMG_5250.png";
+import img5243 from "@/../public/Testimonios/IMG_5243.png";
+import img5244 from "@/../public/Testimonios/IMG_5244.png";
+import img5245 from "@/../public/Testimonios/IMG_5245.png";
+import img5246 from "@/../public/Testimonios/IMG_5246.png";
+import img5247 from "@/../public/Testimonios/IMG_5247.png";
+import img5248 from "@/../public/Testimonios/IMG_5248.png";
+import img5249 from "@/../public/Testimonios/IMG_5249.png";
 import t0 from "@/../public/Testimonios/testimonio.png";
 import t1 from "@/../public/Testimonios/testimonio1.png";
 import t2 from "@/../public/Testimonios/testimonio2.png";
@@ -84,49 +83,63 @@ export function Cierre() {
           decimos nosotros — lo dicen las personas que ya hicieron el proceso.
         </motion.p>
 
+        {/* TrustScore as the lead proof, centered; the validation + first-edition
+            note follows below as supporting copy (not a competing card). */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mt-12 flex flex-col items-center"
+        >
+          <TrustScoreCard />
+
+          <div className="mt-10 max-w-xl text-center">
+            <p className="font-display text-sm uppercase tracking-[0.3em] text-accent">
+              Validado por quienes ya lo vivieron
+            </p>
+            <p className="mt-4 text-xl font-light leading-snug text-foreground sm:text-2xl">
+              <GoldText className="font-display font-semibold">4,8</GoldText> de
+              valoración media entre nuestras alumnas.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-foreground/70">
+              En la primera edición solo dejamos entrar{" "}
+              <span className="font-semibold text-foreground">150 personas</span>.
+              Esta es tu oportunidad de formar parte desde el origen.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Real Trustpilot review screenshots in a horizontal carousel. */}
-        <div className="mt-14">
+        <div className="mt-16">
           <TestimonialCarousel items={TESTIMONIALS} />
         </div>
 
-        {/* The 100 spaces — emotional peak, framed as an invitation. */}
+        {/* Closing invitation — no frame, flowing as a natural continuation.
+            Reframed per client: no fixed number of spots, the bootcamp as the
+            only place plazas open and the filter for the most committed. */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className={cn(
-            styles.frame,
-            // Square corners + visible overflow so the deco brackets can sit
-            // outside the panel edges.
-            "relative mt-20 bg-ink/60 px-6 py-16 text-center shadow-[inset_0_1px_0_0_rgba(243,226,176,0.06),inset_0_-40px_80px_-40px_rgba(0,0,0,0.7)] sm:px-12",
-          )}
+          className="mt-20 text-center"
         >
-          {/* Art Deco corner frame — ceremonial portal. */}
-          <span aria-hidden className={cn(styles.corner, styles.top, styles.left)} />
-          <span aria-hidden className={cn(styles.corner, styles.top, styles.right)} />
-          <span aria-hidden className={cn(styles.corner, styles.bottom, styles.left)} />
-          <span aria-hidden className={cn(styles.corner, styles.bottom, styles.right)} />
-
-          <p className="font-display text-sm uppercase tracking-[0.35em] text-accent">
-            Al terminar el bootcamp
-          </p>
-
-          <p className="mx-auto mt-8 max-w-3xl font-sans text-2xl font-light leading-snug text-foreground sm:text-3xl lg:text-4xl">
-            Abriré{" "}
-            <GoldText className="font-display font-semibold">100</GoldText>{" "}
-            espacios para trabajar conmigo en mi{" "}
-            <em className="font-accent text-[1.2em] italic text-accent-soft">
-              programa principal
-            </em>
+          <p className="mx-auto max-w-3xl font-sans text-2xl font-light leading-snug text-foreground sm:text-3xl lg:text-4xl">
+            Al terminar el tercer día, abriré plazas para{" "}
+            <GoldText className="font-display font-semibold">
+              trabajar conmigo
+            </GoldText>
             .
           </p>
 
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-foreground/70">
-            Este bootcamp es el filtro: de aquí elijo a quienes estén realmente
-            comprometidas para acceder a la Academia Volver al Origen, una
-            experiencia transformacional de 40 días para profundizar tu
-            identidad, manifestación y acción consciente.
+            Este será el único espacio donde abriré plazas para acceder a{" "}
+            <em className="font-accent text-[1.15em] italic text-accent-soft">
+              Volver al Origen
+            </em>{" "}
+            — el filtro para elegir a las personas más comprometidas con su
+            proceso de transformación y con la excelencia.
           </p>
         </motion.div>
       </Container>

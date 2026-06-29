@@ -6,12 +6,13 @@ import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { GoldText } from "@/components/ui/GoldText";
 import { CtaButton } from "@/components/ui/CtaButton";
+import { MatrixRain } from "@/components/ui/MatrixRain";
 import { cn } from "@/lib/cn";
 import { CHECKOUT_URL } from "@/lib/links";
 import styles from "./Experiencia.module.css";
-import img1 from "@/../public/img1.jpg";
-import img2 from "@/../public/img2.jpg";
-import img3 from "@/../public/img3.jpg";
+import img1 from "@/../public/dia01.jpg";
+import img2 from "@/../public/dia02.jpg";
+import img3 from "@/../public/dia03.jpg";
 
 // The three days — copy verbatim. Each image is a sacred-geometry portal that
 // mirrors the day's intention (seeing, recognizing, ascending out).
@@ -86,8 +87,8 @@ export function Experiencia() {
                 "group overflow-hidden rounded-2xl border border-accent/15 bg-surface/30 transform-3d",
               )}
             >
-              {/* Portal image */}
-              <div className="relative aspect-4/5 w-full overflow-hidden">
+              {/* Portal image — 2:3 to match the 400×600 source exactly. */}
+              <div className="relative aspect-2/3 w-full overflow-hidden">
                 <Image
                   src={image}
                   alt=""
@@ -96,8 +97,15 @@ export function Experiencia() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   placeholder="blur"
                 />
-                {/* Dark bottom inset: grounds the image and seats the copy. */}
-                <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/60 to-transparent" />
+
+                {/* Matrix glyphs over the portal — fade=0 fades old glyphs to
+                    transparent (destination-out), so the cascade forms without
+                    any dark veil and the artwork stays fully visible. */}
+                <MatrixRain fade={0} opacity={0.7} />
+
+                {/* Dark bottom inset: only the lower third darkens to seat the
+                    copy, leaving the artwork visible above. */}
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-ink via-ink/50 to-transparent" />
 
                 {/* Day number — large, with a continuous luxury gold drift. */}
                 <GoldText className="absolute left-6 top-5 font-display text-5xl font-semibold drop-shadow-[0_2px_10px_rgba(8,8,8,0.7)]">

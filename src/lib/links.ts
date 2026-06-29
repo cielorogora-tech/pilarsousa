@@ -8,3 +8,6 @@ export const CHECKOUT_URL = "https://link.fastpaydirect.com/payment-link/6a429e2
 
 // Private WhatsApp group (thank-you page). TODO: replace with the real invite.
 export const WHATSAPP_GROUP_URL = "#";
+
+// Direct WhatsApp support line (thank-you page).
+export const WHATSAPP_SUPPORT_URL = "https://wa.link/i8qdol";
