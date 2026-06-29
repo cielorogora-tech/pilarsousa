@@ -61,7 +61,6 @@ export function Manifiesto() {
         ease: "power3.out",
         stagger: 0.06,
       })
-        .to(body, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
         .to(
           splitTwo.words,
           {
@@ -72,8 +71,9 @@ export function Manifiesto() {
             ease: "power4.out",
             stagger: 0.08,
           },
-          "-=0.1",
-        );
+          "-=0.2",
+        )
+        .to(body, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.1");
 
       return () => {
         splitOne.revert();
@@ -99,20 +99,20 @@ export function Manifiesto() {
           No manifiestas lo que deseas.
         </p>
 
-        {/* Bridging body copy — appears with the same timeline. */}
+        <p
+          data-line="2"
+          className="mt-6 font-display text-4xl font-semibold leading-tight text-accent sm:text-5xl lg:text-5xl"
+        >
+          Manifiestas quien eres.
+        </p>
+
+        {/* Bridging body copy — appears last with the same timeline. */}
         <p
           data-body
           className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-foreground/60 sm:text-lg"
         >
           Tu realidad no responde solo a lo que quieres. Responde a la identidad
           desde la que eliges, decides y sostienes tu vida.
-        </p>
-
-        <p
-          data-line="2"
-          className="mt-10 font-display text-4xl font-semibold leading-tight text-accent sm:text-5xl lg:text-5xl"
-        >
-          Manifiestas quien eres.
         </p>
       </Container>
     </section>
