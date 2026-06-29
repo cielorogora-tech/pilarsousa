@@ -1,77 +1,63 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { Quote } from "lucide-react";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { GoldText } from "@/components/ui/GoldText";
-import { CtaButton } from "@/components/ui/CtaButton";
+import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { cn } from "@/lib/cn";
 import styles from "./Cierre.module.css";
+import t0 from "@/../public/Testimonios/testimonio.png";
+import t1 from "@/../public/Testimonios/testimonio1.png";
+import t2 from "@/../public/Testimonios/testimonio2.png";
+import t3 from "@/../public/Testimonios/testimonio3.png";
+import t4 from "@/../public/Testimonios/testimonio4.png";
+import t5 from "@/../public/Testimonios/testimonio5.png";
+import t6 from "@/../public/Testimonios/testimonio6.png";
+import t7 from "@/../public/Testimonios/testimonio7.png";
+import t8 from "@/../public/Testimonios/testimonio8.png";
+import t9 from "@/../public/Testimonios/testimonio9.png";
+import t10 from "@/../public/Testimonios/testimonio10.png";
 
-// Testimonials are placeholders — NEVER invent social proof. Replace each entry
-// with a real quote + name (and an optional photo) once the client provides it.
-const TESTIMONIALS = [
-  { quote: "[ Testimonio pendiente ]", name: "[ Nombre ]" },
-  { quote: "[ Testimonio pendiente ]", name: "[ Nombre ]" },
-  { quote: "[ Testimonio pendiente ]", name: "[ Nombre ]" },
-];
-
-const grid: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const card: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+// Real Trustpilot review screenshots — verifiable social proof.
+const TESTIMONIALS = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10];
 
 /**
  * Section 6 — Testimonials + opening of 100 spaces + final CTA.
  *
- * The close. Premium testimonial cards (placeholders until real quotes exist),
- * then the emotional peak: a dark panel announcing the 100 spaces with the
- * number "100" in living gold, framed as an invitation — not aggressive
- * scarcity. Ends on the primary CTA.
+ * The close. A horizontal carousel of real Trustpilot review screenshots, then
+ * the emotional peak: a dark panel announcing the 100 spaces with the number
+ * "100" in living gold, framed as an invitation — not aggressive scarcity.
  */
 export function Cierre() {
   return (
     <section id="cierre" className="bg-surface py-[clamp(4rem,2rem+8vh,7rem)]">
       <Container>
-        <SectionTitle tone="dark">Historias de transformación</SectionTitle>
+        <SectionTitle tone="dark">
+          Historias de{" "}
+          <em className="font-accent font-medium italic text-accent-soft">
+            transformación
+          </em>
+        </SectionTitle>
 
-        {/* Testimonials — placeholder cards, structure ready for real content. */}
-        <motion.ul
-          variants={grid}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid gap-5 md:grid-cols-3"
+        {/* Intro body — distilled from the client's notes. The "+60%" metric and
+            Trustpilot integration are intentionally left out until verified. */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-foreground/70"
         >
-          {TESTIMONIALS.map((t, i) => (
-            <motion.li
-              key={i}
-              variants={card}
-              className="flex flex-col gap-5 rounded-2xl border border-accent/15 bg-ink/40 p-7 shadow-[inset_0_1px_0_0_rgba(243,226,176,0.05),inset_0_0_30px_0_rgba(0,0,0,0.5)]"
-            >
-              <Quote size={28} className="text-accent/70" strokeWidth={1.5} />
-              <p className="grow text-base italic leading-relaxed text-foreground/60">
-                {t.quote}
-              </p>
-              <div className="flex items-center gap-3 pt-2">
-                <span className="size-10 rounded-full border border-accent/25 bg-surface/60" />
-                <span className="font-accent text-lg italic text-accent-soft">
-                  {t.name}
-                </span>
-              </div>
-            </motion.li>
-          ))}
-        </motion.ul>
+          Volver al Origen nació para bajar la espiritualidad a lo práctico: un
+          sistema para reprogramar tu identidad y usarlo en la vida real. Y no lo
+          decimos nosotros — lo dicen las personas que ya hicieron el proceso.
+        </motion.p>
+
+        {/* Real Trustpilot review screenshots in a horizontal carousel. */}
+        <div className="mt-14">
+          <TestimonialCarousel items={TESTIMONIALS} />
+        </div>
 
         {/* The 100 spaces — emotional peak, framed as an invitation. */}
         <motion.div
@@ -107,14 +93,11 @@ export function Cierre() {
           </p>
 
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-foreground/70">
-            Este bootcamp será la puerta de entrada para quienes quieran
-            profundizar el proceso y continuar trabajando su identidad,
-            manifestación y acción consciente en una experiencia más profunda.
+            Este bootcamp es el filtro: de aquí elijo a quienes estén realmente
+            comprometidas para acceder a la Academia Volver al Origen, una
+            experiencia transformacional de 40 días para profundizar tu
+            identidad, manifestación y acción consciente.
           </p>
-
-          <div className="mt-12 flex justify-center">
-            <CtaButton href="#inscripcion">Quiero entrar al bootcamp</CtaButton>
-          </div>
         </motion.div>
       </Container>
     </section>

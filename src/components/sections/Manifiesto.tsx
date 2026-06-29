@@ -28,7 +28,6 @@ export function Manifiesto() {
 
       const lineOne = root.current!.querySelector<HTMLElement>("[data-line='1']")!;
       const lineTwo = root.current!.querySelector<HTMLElement>("[data-line='2']")!;
-      const mark = root.current!.querySelector<HTMLElement>("[data-mark]")!;
 
       // Split both lines into words for staggered reveals.
       const splitOne = new SplitText(lineOne, { type: "words", wordsClass: "mf-word" });
@@ -41,14 +40,16 @@ export function Manifiesto() {
         opacity: 0,
         filter: "blur(10px)",
       });
-      gsap.set(mark, { scale: 0, opacity: 0, rotate: 45 });
+      const body = root.current!.querySelector<HTMLElement>("[data-body]")!;
+      gsap.set(body, { opacity: 0, y: 16 });
 
+      // Fire the reveal as soon as the section enters view (no scrub) so the
+      // text appears quickly — the user shouldn't have to scroll it into place.
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
-          start: "top 70%",
-          end: "bottom 60%",
-          scrub: 1, // tie the reveal to the scroll position — film-like.
+          start: "top 85%",
+          toggleActions: "play none none none",
         },
       });
 
@@ -56,22 +57,22 @@ export function Manifiesto() {
         y: 0,
         opacity: 1,
         filter: "blur(0px)",
-        duration: 0.6,
+        duration: 0.5,
         ease: "power3.out",
-        stagger: 0.12,
+        stagger: 0.06,
       })
-        .to(mark, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, "-=0.2")
+        .to(body, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
         .to(
           splitTwo.words,
           {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.8,
+            duration: 0.6,
             ease: "power4.out",
-            stagger: 0.18,
+            stagger: 0.08,
           },
-          "+=0.1",
+          "-=0.1",
         );
 
       return () => {
@@ -86,28 +87,30 @@ export function Manifiesto() {
     <section
       id="manifiesto"
       ref={root}
-      className="flex items-center bg-[#0A0908] py-[clamp(7rem,4rem+12vh,12rem)]"
+      className="flex items-center bg-[#0A0908] pb-[clamp(7rem,4rem+12vh,12rem)] pt-[clamp(3rem,2rem+6vh,12rem)]"
     >
       <Container narrow className="text-center">
         {/* No overflow clip here: the blur halo needs room to breathe as each
             word rises and de-blurs into place. */}
         <p
           data-line="1"
-          className="font-sans text-2xl font-light leading-tight text-foreground/85 sm:text-3xl lg:text-4xl"
+          className="font-sans text-3xl font-light leading-tight text-foreground/85 lg:text-4xl"
         >
           No manifiestas lo que deseas.
         </p>
 
-        {/* Subtle sacred-geometry diamond instead of a rule line. */}
-        <span
-          data-mark
-          aria-hidden
-          className="mx-auto my-12 block size-2 rotate-45 bg-accent/80"
-        />
+        {/* Bridging body copy — appears with the same timeline. */}
+        <p
+          data-body
+          className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-foreground/60 sm:text-lg"
+        >
+          Tu realidad no responde solo a lo que quieres. Responde a la identidad
+          desde la que eliges, decides y sostienes tu vida.
+        </p>
 
         <p
           data-line="2"
-          className="font-display text-4xl font-semibold leading-tight text-accent sm:text-5xl lg:text-6xl"
+          className="mt-10 font-display text-4xl font-semibold leading-tight text-accent sm:text-5xl lg:text-5xl"
         >
           Manifiestas quien eres.
         </p>

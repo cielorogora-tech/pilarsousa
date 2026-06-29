@@ -56,9 +56,9 @@ export function Patron() {
         {/* Reframing headline — shared title pattern, light tone. Emphasis via
             Cormorant italic, never Cinzel caps. */}
         <SectionTitle tone="light">
-          Quieres una realidad nueva, pero{" "}
+          Quieres una nueva realidad, pero{" "}
           <em className="font-accent font-medium italic text-earth-gold">una parte de ti</em>{" "}
-          todavía protege la anterior.
+          todavía protege la identidad que sostiene tu vieja realidad.
         </SectionTitle>
 
         {/* Lead-in to the list. */}
@@ -69,8 +69,29 @@ export function Patron() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mx-auto mt-8 max-w-xl text-center text-base leading-relaxed text-forest-900/70"
         >
-          Conscientemente quieres cambiar. Pero una parte de tu identidad
-          todavía:
+          Conscientemente quieres cambiar. Pero inconscientemente no.
+        </motion.p>
+
+        {/* Highlighted truth — the invisible block. */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="mx-auto mt-6 max-w-2xl text-center font-accent text-2xl italic text-earth-gold sm:text-3xl"
+        >
+          Se crea, en el plano espiritual, un bloqueo invisible.
+        </motion.p>
+
+        {/* Re-introduces the list after the highlighted block line. */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-forest-900/70"
+        >
+          Porque, en lo profundo, una parte de ti todavía:
         </motion.p>
 
         {/* The six patterns as carved cards — inset shadows on a light face. */}
@@ -79,16 +100,17 @@ export function Patron() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
         >
           {PATTERNS.map(({ icon: Icon, text }) => (
             <motion.li
               key={text}
               variants={card}
-              className="group relative flex items-start gap-4 rounded-2xl border border-earth-gold/20 bg-white/50 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),inset_0_0_24px_0_rgba(122,100,66,0.07)] transition-colors duration-500 hover:border-earth-gold/45"
+              whileTap={{ scale: 0.97 }}
+              className="group relative flex items-start gap-4 rounded-2xl border border-earth-gold/20 bg-white/50 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),inset_0_0_24px_0_rgba(122,100,66,0.07)] transition-all duration-300 hover:border-earth-gold/45 active:border-earth-gold/60 active:bg-white/70 active:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9),0_8px_24px_-12px_rgba(122,100,66,0.5)]"
             >
-              {/* Icon medallion beside the text — carved seal on the light face. */}
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-earth-gold/30 bg-cream text-earth-gold shadow-[inset_0_0_12px_0_rgba(122,100,66,0.12)]">
+              {/* Icon medallion beside the text — carved seal that warms on tap. */}
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-earth-gold/30 bg-cream text-earth-gold shadow-[inset_0_0_12px_0_rgba(122,100,66,0.12)] transition-colors duration-300 group-active:border-earth-gold/60 group-active:bg-cream-gold/40">
                 <Icon size={20} strokeWidth={1.5} />
               </span>
               <p className="text-base leading-relaxed text-forest-900/85">
@@ -104,17 +126,15 @@ export function Patron() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-16 max-w-2xl text-center"
+          className="mx-auto mt-10 max-w-2xl text-center"
         >
-          <p className="text-lg leading-relaxed text-forest-900/85">
-            Por eso no basta con desear algo diferente.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-forest-900">
-            Mientras una parte de ti siga necesitando el patrón,{" "}
+          <p className="text-lg leading-relaxed text-forest-900">
+            Mientras no elimines ese{" "}
             <em className="font-accent text-2xl italic text-earth-gold sm:text-3xl">
-              continuarás reproduciéndolo
+              bloqueo invisible
             </em>{" "}
-            aunque conscientemente quieras dejarlo atrás.
+            que limita tu nueva identidad, vas a continuar reproduciendo la
+            anterior.
           </p>
         </motion.div>
       </Container>

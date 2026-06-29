@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import bgDesktop from "@/../public/banner-pilar.jpg";
-import bgMobile from "@/../public/banner-pilar-mobile.jpg";
+import bgMobile from "@/../public/banner-pilar-mobile2.jpg";
 
 /**
  * Section 5 — Soy Pilar Sousa (authority).
@@ -40,25 +40,24 @@ export function Pilar() {
         {/* Readability gradient — bottom on mobile, left on desktop. Stronger
             than the Hero because the copy here is long and must be read. */}
         <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_60%,transparent)_35%,transparent_70%)] lg:bg-[linear-gradient(to_right,var(--color-ink)_0%,color-mix(in_oklab,var(--color-ink)_70%,transparent)_38%,transparent_62%)]" />
+
+        {/* Top separator: a black fade from the previous section + a thin gold
+            hairline, easing the transition into this banner. */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(to_bottom,#0A0908,transparent)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--color-accent),transparent)] opacity-50" />
       </div>
 
       <Container className="pb-16 pt-[55vh] sm:pt-[60vh] lg:py-[clamp(3rem,1rem+6vh,7rem)]">
         {/* text-shadow on the whole column: the copy partly sits over the photo
             transition on mobile, so a soft ink shadow keeps it readable. */}
         <div className="max-w-xl [text-shadow:0_2px_16px_rgba(8,8,8,0.7)]">
-          {/* Name + opening line fused as one presentation block. */}
           <Reveal>
-            <p className="font-display text-base font-medium uppercase tracking-[0.3em] text-accent sm:text-lg">
-              Soy Pilar Sousa
-            </p>
             <h2
               id="pilar-title"
-              className="mt-3 font-sans text-2xl font-light leading-tight text-foreground sm:text-3xl lg:text-4xl"
+              className="font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              De sentirme perdida a{" "}
-              <em className="font-accent text-[1.25em] font-medium italic text-accent-soft">
-                vivir con propósito
-              </em>
+              Soy{" "}
+              <span className="text-accent">Pilar Sousa</span>
             </h2>
           </Reveal>
 

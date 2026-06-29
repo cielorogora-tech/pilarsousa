@@ -5,7 +5,9 @@ import { motion, type Variants } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { GoldText } from "@/components/ui/GoldText";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { cn } from "@/lib/cn";
+import { CHECKOUT_URL } from "@/lib/links";
 import styles from "./Experiencia.module.css";
 import img1 from "@/../public/img1.jpg";
 import img2 from "@/../public/img2.jpg";
@@ -24,17 +26,15 @@ const grid: Variants = {
   visible: { transition: { staggerChildren: 0.18 } },
 };
 
-// 3D entrance: each card swings up and forward from a deeper lean + slight
-// rotateY, so it reads as turning toward you. Staggered via the parent.
+// 3D entrance: cards swing up and forward from a slight lean, staggered.
 const card: Variants = {
-  hidden: { opacity: 0, y: 64, rotateX: 18, rotateY: -6, scale: 0.96 },
+  hidden: { opacity: 0, y: 48, rotateX: 14, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     rotateX: 0,
-    rotateY: 0,
     scale: 1,
-    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -64,14 +64,16 @@ export function Experiencia() {
           representa quién eres.
         </motion.p>
 
-        {/* Three-column grid on desktop, stacked cleanly on mobile.
-            perspective on the container makes the 3D entrance read in space. */}
+        {/* Clean responsive grid: 3 columns on desktop, stacked on mobile.
+            (The mobile sticky-stack was dropped — sticky + transform conflict
+            and caused layout bugs; a clean grid is solid and still premium.)
+            perspective on the container makes the 3D entrance/hover read in space. */}
         <motion.ul
           variants={grid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-16 grid grid-cols-1 gap-6 perspective-distant md:grid-cols-3"
+          className="mt-10 grid grid-cols-1 gap-6 perspective-distant md:grid-cols-3"
         >
           {DAYS.map(({ n, label, text, image }) => (
             <motion.li
@@ -104,7 +106,7 @@ export function Experiencia() {
 
                 {/* Copy seated on the dark base of the image. */}
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="font-accent text-lg italic text-accent-soft">
+                  <p className="font-accent text-3xl italic text-accent-soft">
                     {label}
                   </p>
                   <p className="mt-2 text-base leading-relaxed text-foreground/90">
@@ -115,6 +117,19 @@ export function Experiencia() {
             </motion.li>
           ))}
         </motion.ul>
+
+        {/* Central CTA below the three days, with the price tag under it. */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-14 flex justify-center"
+        >
+          <CtaButton href={CHECKOUT_URL} external>
+            Resetear mi identidad
+          </CtaButton>
+        </motion.div>
       </Container>
     </section>
   );
