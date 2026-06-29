@@ -7,6 +7,15 @@ import { GoldText } from "@/components/ui/GoldText";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { cn } from "@/lib/cn";
 import styles from "./Cierre.module.css";
+// New testimonials — IMG_5250 leads, then the rest, ahead of the originals.
+import img5250 from "@/../public/Testimonios/IMG_5250.PNG";
+import img5243 from "@/../public/Testimonios/IMG_5243.PNG";
+import img5244 from "@/../public/Testimonios/IMG_5244.PNG";
+import img5245 from "@/../public/Testimonios/IMG_5245.PNG";
+import img5246 from "@/../public/Testimonios/IMG_5246.PNG";
+import img5247 from "@/../public/Testimonios/IMG_5247.PNG";
+import img5248 from "@/../public/Testimonios/IMG_5248.PNG";
+import img5249 from "@/../public/Testimonios/IMG_5249.PNG";
 import t0 from "@/../public/Testimonios/testimonio.png";
 import t1 from "@/../public/Testimonios/testimonio1.png";
 import t2 from "@/../public/Testimonios/testimonio2.png";
@@ -19,8 +28,29 @@ import t8 from "@/../public/Testimonios/testimonio8.png";
 import t9 from "@/../public/Testimonios/testimonio9.png";
 import t10 from "@/../public/Testimonios/testimonio10.png";
 
-// Real Trustpilot review screenshots — verifiable social proof.
-const TESTIMONIALS = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10];
+// Real Trustpilot review screenshots — verifiable social proof. IMG_5250 leads,
+// followed by the rest of the new batch, then the original screenshots.
+const TESTIMONIALS = [
+  img5250,
+  img5243,
+  img5244,
+  img5245,
+  img5246,
+  img5247,
+  img5248,
+  img5249,
+  t0,
+  t1,
+  t2,
+  t3,
+  t4,
+  t5,
+  t6,
+  t7,
+  t8,
+  t9,
+  t10,
+];
 
 /**
  * Section 6 — Testimonials + opening of 100 spaces + final CTA.

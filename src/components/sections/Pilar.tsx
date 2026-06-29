@@ -88,7 +88,8 @@ export function Pilar() {
                   Volver al Origen
                 </em>
                 , la formación en la que comparto, paso a paso, las herramientas
-                que me ayudaron a reencontrarme.
+                que me ayudaron a reencontrarme y a manifestar la realidad de mis
+                sueños.
               </p>
             </div>
           </Reveal>
