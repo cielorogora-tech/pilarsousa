@@ -4,7 +4,7 @@
  */
 
 // Stripe checkout for the bootcamp enrollment.
-export const CHECKOUT_URL = "https://buy.stripe.com/8x25kv7cCdyge4AgVBbEA00";
+export const CHECKOUT_URL = "https://link.fastpaydirect.com/payment-link/6a429e26a655fa0b802a1cde";
 
 // Private WhatsApp group (thank-you page). TODO: replace with the real invite.
 export const WHATSAPP_GROUP_URL = "#";
