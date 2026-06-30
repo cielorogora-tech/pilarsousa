@@ -82,15 +82,22 @@ export function Hero() {
           short laptops (e.g. 1366×768) and only grows on tall screens. */}
       <Container className="pb-16 pt-[200px] lg:py-[clamp(2.5rem,1rem+5vh,7rem)]">
         <div className="max-w-2xl">
-          {/* Program logotype. */}
+          {/* Program logotype + format badge. */}
           <Reveal>
-            <Image
-              src={logo}
-              alt="Volver al Origen — Bootcamp"
-              priority
-              sizes="(min-width: 1024px) 240px, 180px"
-              className="mb-2 h-auto w-45 lg:w-60"
-            />
+            <div className="mb-2 flex items-center gap-4">
+              <Image
+                src={logo}
+                alt="Volver al Origen — Bootcamp"
+                priority
+                sizes="(min-width: 1024px) 240px, 180px"
+                className="h-auto w-45 lg:w-60"
+              />
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-accent/20 px-3.5 py-2 font-display text-xs font-bold uppercase tracking-[0.15em] text-foreground shadow-[0_6px_24px_-4px_rgba(0,0,0,0.7)] backdrop-blur-md">
+                <span aria-hidden className="size-2 animate-pulse rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.7)]" />
+                Bootcamp{" "}
+                <span className="text-white">Online</span>
+              </span>
+            </div>
           </Reveal>
 
           {/* Hook as the headline promise (>=32px). Light-gold animated
