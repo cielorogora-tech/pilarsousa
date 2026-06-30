@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { GoldText } from "@/components/ui/GoldText";
@@ -123,6 +124,18 @@ export default function GraciasPage() {
           </Reveal>
         </Container>
       </section>
+
+      {/* Meta Pixel Purchase event — fires on load, after the base pixel from
+          the root layout has initialized fbq. Reaching this page = a completed
+          purchase (FastPayDirect redirects here after payment). */}
+      <Script id="meta-pixel-purchase" strategy="afterInteractive">
+        {`fbq('track', 'Purchase', {
+  value: 44.00,
+  currency: 'EUR',
+  content_type: 'product',
+  num_items: 1
+});`}
+      </Script>
     </main>
   );
 }
