@@ -125,16 +125,22 @@ export default function GraciasPage() {
         </Container>
       </section>
 
-      {/* Meta Pixel Purchase event — fires on load, after the base pixel from
-          the root layout has initialized fbq. Reaching this page = a completed
-          purchase (FastPayDirect redirects here after payment). */}
+      {/* Meta Pixel Purchase event — reaching this page = a completed purchase
+          (FastPayDirect redirects here after payment). Waits for fbq from the
+          base pixel (root layout) before firing, so script order can't drop it. */}
       <Script id="meta-pixel-purchase" strategy="afterInteractive">
-        {`fbq('track', 'Purchase', {
-  value: 44.00,
-  currency: 'EUR',
-  content_type: 'product',
-  num_items: 1
-});`}
+        {`(function firePurchase(tries){
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'Purchase', {
+      value: 44.00,
+      currency: 'EUR',
+      content_type: 'product',
+      num_items: 1
+    });
+  } else if (tries < 50) {
+    setTimeout(function(){ firePurchase(tries + 1); }, 100);
+  }
+})(0);`}
       </Script>
     </main>
   );
